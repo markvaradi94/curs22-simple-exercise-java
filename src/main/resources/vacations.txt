@@ -1,0 +1,20 @@
+Bangkok|5400|10
+Paris|2200|6
+London|3400|8
+Dubai|5000|9
+Singapore|6400|8
+Kuala Lumpur|6100|9
+New York|7000|10
+Istanbul|2000|11
+Tokyo|7400|8
+Antalya|2400|10
+Paris|1500|3
+Paris|4000|14
+London|5000|15
+Dubai|7000|12
+Singapore|3400|4
+London|3000|6
+New York|5000|6
+London|2000|3
+Tokyo|9000|11
+Antalya|3000|14
