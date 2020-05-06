@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +26,6 @@ public class VacationService {
     public List<Vacation> getAllVacations() {
         List<Vacation> vacations = new ArrayList<>();
         vacationRepository.findAll().forEach(vacations::add);
-        vacations.sort(Comparator.comparing(Vacation::getId));
         return Collections.unmodifiableList(vacations);
     }
 
