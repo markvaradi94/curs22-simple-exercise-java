@@ -28,7 +28,7 @@ public class VacationReader {
     public List<Vacation> read() {
         List<Vacation> result = new ArrayList<>();
         try (InputStream inputStream = file.getInputStream()) {
-            Scanner scanner = new Scanner(file.getInputStream());
+            Scanner scanner = new Scanner(inputStream);
             scanner.useDelimiter("[|]");
             while (scanner.hasNextLine()) {
                 String[] tokens = scanner.nextLine().split("[|]");

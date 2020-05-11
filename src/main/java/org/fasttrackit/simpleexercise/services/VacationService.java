@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class VacationService {
@@ -30,20 +31,19 @@ public class VacationService {
     }
 
     public List<Vacation> vacationsInLocation(String location) {
-        return getAllVacations().stream()
+        return StreamSupport.stream(vacationRepository.findAll().spliterator(), false)
                 .filter(vacation -> vacation.getLocation().equalsIgnoreCase(location))
                 .collect(Collectors.toList());
     }
 
     public List<Vacation> vacationsWithPriceLowerThan(Integer maxPrice) {
-        return getAllVacations().stream()
+        return StreamSupport.stream(vacationRepository.findAll().spliterator(), false)
                 .filter(vacation -> vacation.getPrice() <= maxPrice)
                 .collect(Collectors.toList());
     }
 
     public Vacation add(Vacation vacation) {
-        vacationRepository.save(vacation);
-        return vacation;
+        return vacationRepository.save(vacation);
     }
 
     public Vacation delete(Integer id) {
@@ -53,20 +53,11 @@ public class VacationService {
     }
 
     public Vacation replace(Integer id, Vacation vacation) {
-//        Vacation vacationToReplace = updateVacation(id, vacation);   keeps the same ID and updates fields
         Vacation vacationToReplace = getOrThrow(id);
-        vacationRepository.delete(vacationToReplace);       // new entry with different ID
+        vacationRepository.delete(vacationToReplace);
         vacationRepository.save(vacation);
         return vacation;
     }
-
-//    private Vacation updateVacation(Integer id, Vacation vacation) {
-//        Vacation vacationToReplace = getOrThrow(id);
-//        vacationToReplace.setLocation(vacation.getLocation());
-//        vacationToReplace.setDuration(vacation.getDuration());
-//        vacationToReplace.setPrice(vacation.getPrice());
-//        return vacationToReplace;
-//    }
 
     private Vacation getOrThrow(Integer id) {
         return vacationRepository
